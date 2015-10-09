@@ -1,6 +1,6 @@
 {
   "name": "pkmn",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "a node.js pokeapi.co api wrapper",
   "homepage": "",
   "repository": "stephantabor/pkmn",
@@ -20,16 +20,17 @@
     "pokedex"
   ],
   "devDependencies": {
+    "babel-core": "^5.5.0",
     "chai": "^3.3.0",
+    "chai-as-promised": "^5.1.0",
     "gulp": "^3.6.0",
+    "gulp-babel": "^5.1.0",
     "gulp-eslint": "^1.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^0.9.0",
     "gulp-mocha": "^2.0.0",
-    "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^0.4.5",
-    "gulp-babel": "^5.1.0",
-    "babel-core": "^5.5.0",
+    "gulp-plumber": "^1.0.0",
     "isparta": "^3.0.3"
   },
   "scripts": {
@@ -39,7 +40,6 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.10.2",
-    "chai-as-promised": "^5.1.0",
     "request": "^2.64.0"
   }
 }
