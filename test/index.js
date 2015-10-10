@@ -46,12 +46,6 @@ describe('pkmn', function () {
             p.query = 'ayyy.lmao';
             return expect(p.end()).to.eventually.be.rejected;
         });
-
-        it('should reset the query', () => {
-            p.query = 'modified.query';
-            expect(p.end().catch(() => p.query))
-                .to.eventually.equal(p.queryUrl);
-        });
     });
     describe('get', () => {
         it('should get resource by name', () => {
@@ -67,6 +61,15 @@ describe('pkmn', function () {
 
         it('should reject for too few arguments', () => {
             return expect(p.get('pokemon')).to.eventually.be.rejected;
+        });
+
+        it('should get several resources for id array', () => {
+            let names = p.get('pokemon', ['bulbasaur', 1, 1])
+                .reduce((name, poke) =>
+                    name === poke.name ? 'Bulbasaur' : false, 'Bulbasaur');
+
+
+            expect(names).to.eventually.equal('Bulbasaur');
         });
     });
     describe('resource', () => {
