@@ -1,0 +1,114 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/4.1.1/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@2.14.4
+3 info using node@v4.1.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/stephantabor/HR/projects/pokemon',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/stephantabor/.npm/pkmn/1.0.3/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/stephantabor/.npm/pkmn/1.0.3/package.tgz',
+9 verbose tar pack   '/Users/stephantabor/HR/projects/pokemon' ]
+10 verbose tarball /Users/stephantabor/.npm/pkmn/1.0.3/package.tgz
+11 verbose folder /Users/stephantabor/HR/projects/pokemon
+12 info prepublish pkmn@1.0.3
+13 verbose unsafe-perm in lifecycle true
+14 verbose addLocalTarball adding from inside cache /Users/stephantabor/.npm/pkmn/1.0.3/package.tgz
+15 silly cache afterAdd pkmn@1.0.3
+16 verbose afterAdd /Users/stephantabor/.npm/pkmn/1.0.3/package/package.json not in flight; writing
+17 verbose afterAdd /Users/stephantabor/.npm/pkmn/1.0.3/package/package.json written
+18 silly publish { name: 'pkmn',
+18 silly publish   version: '1.0.3',
+18 silly publish   description: 'a node.js pokeapi.co api wrapper',
+18 silly publish   homepage: 'https://github.com/stephantabor/pkmn#readme',
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/stephantabor/pkmn.git' },
+18 silly publish   author:
+18 silly publish    { name: 'Stephan Tabor',
+18 silly publish      email: 'stephantabor@gmail.com',
+18 silly publish      url: 'http://stephantabor.com' },
+18 silly publish   files: [ 'dist' ],
+18 silly publish   main: 'dist/index.js',
+18 silly publish   keywords: [ 'pokemon', 'pokémon', 'pokeapi', 'pokedex' ],
+18 silly publish   devDependencies:
+18 silly publish    { 'babel-core': '^5.5.0',
+18 silly publish      chai: '^3.3.0',
+18 silly publish      'chai-as-promised': '^5.1.0',
+18 silly publish      gulp: '^3.6.0',
+18 silly publish      'gulp-babel': '^5.1.0',
+18 silly publish      'gulp-eslint': '^1.0.0',
+18 silly publish      'gulp-exclude-gitignore': '^1.0.0',
+18 silly publish      'gulp-istanbul': '^0.9.0',
+18 silly publish      'gulp-mocha': '^2.0.0',
+18 silly publish      'gulp-nsp': '^0.4.5',
+18 silly publish      'gulp-plumber': '^1.0.0',
+18 silly publish      isparta: '^3.0.3' },
+18 silly publish   scripts: { prepublish: 'gulp prepublish', test: 'gulp' },
+18 silly publish   license: 'MIT',
+18 silly publish   dependencies: { bluebird: '^2.10.2', request: '^2.64.0' },
+18 silly publish   readme: '# pkmn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]\n> pokeapi.co wrapper. Details about the api can be found here: http://pokeapi.co/docs/\n\n\n## Install\n\n```sh\n$ npm install --save pkmn\n```\n\n\n## Usage\n\n```js\nvar Pkmn = require(\'pkmn\');\nvar p = new Pkmn();\n\n```\n\n### Get\nAll methods return a bluebird promise.\n\n`.get` requires two arguments, a `resource` and an `id`. `id` can be a `string`, `number`, or `array`.\n\n```js\np.get(\'pokemon\', \'meowth\')\n    .then(pokemon => /* do something */)\n    .catch(err => /* handle error */);\n    \np.get(\'pokemon\', [1, \'mew\'])\n    .then(console.log) // logs [{name: \'Bulbasaur\' ...}, {name: \'Mew\'...}]\n```\n\nErrors and responses from the pokeapi that are not of status code 200 will\nbe rejected.\n\n```js\np.get(\'pokemon\', \'Vegeta\')\n    .catch(console.error) // logs [Error] 404\n```\nToo few arguments to `.get` also throws an error. All resources except `pokedex` require an `id` argument to passed to `.get` with them. \n```js    \np.get(\'pokemon\')\n    .then(console.log)    // doesn\'t log\n    .catch(console.error) // logs [Error] id argument required\n    \np.get(\'pokedex\')\n    .then(console.log) // logs the pokedex\n```\n\nThe full list of valid resources is: \n```\npokedex, pokemon, egg, type, description, move, ability, sprite, game\n```\n\nAdditionally, `.get` can take a `resource_id` as an argument. This is useful because most responses from pokeapi will have have a `resource_id` field. For example, a pokemon will come with a list of moves, each move contains a `resource_id` that you can pass directly to `.get` to retrieve the details of that move.\n\n```js\np.get(\'/api/v1/pokemon/bulbasaur\')\n...\n```\n\n\n### Convenience Methods\n\nAll valid resource argumets to `.get` also have convenience methods: \n```js\np.pokemon([33, \'snorlax\', 209)\np.ability(56)\np.egg(2)\np.pokedex()\n\n// etc...\n```\n\nThe full list of api resources can obtained from the api via `.api`\n\n```js\np.api()\n```\n\n## License\n\nMIT © [Stephan Tabor](http://stephantabor.com)\n\n\n[npm-image]: https://badge.fury.io/js/pkmn.svg\n[npm-url]: https://npmjs.org/package/pkmn\n[travis-image]: https://travis-ci.org/stephantabor/pkmn.svg?branch=master\n[travis-url]: https://travis-ci.org/stephantabor/pkmn\n[daviddm-image]: https://david-dm.org/stephantabor/pkmn.svg?theme=shields.io\n[daviddm-url]: https://david-dm.org/stephantabor/pkmn\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: 'a69ca8a465e72bca3d0945242c57cd13ed0455ce',
+18 silly publish   bugs: { url: 'https://github.com/stephantabor/pkmn/issues' },
+18 silly publish   _id: 'pkmn@1.0.3',
+18 silly publish   _shasum: '3fc135e6258308f8d29af3963c9cc67f7dde248c',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name pkmn
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/pkmn
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading /Users/stephantabor/.npm/pkmn/1.0.3/package.tgz
+26 verbose request uri https://registry.npmjs.org/pkmn
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 9:30:45 PM
+29 verbose request using bearer token for auth
+30 verbose request id 9bc0df55b0ada910
+31 http request PUT https://registry.npmjs.org/pkmn
+32 http 403 https://registry.npmjs.org/pkmn
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=60',
+33 verbose headers   'content-length': '95',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Sun, 11 Oct 2015 01:30:46 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-atl6227-ATL',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1444527045.880144,VS0,VE966' }
+34 verbose request invalidating /Users/stephantabor/.npm/registry.npmjs.org/pkmn on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: "You cannot publish over the previously published version 1.0.3." : pkmn
+36 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:263:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+36 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:171:14)
+36 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+36 verbose stack     at emitTwo (events.js:87:13)
+36 verbose stack     at Request.emit (events.js:172:7)
+36 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1073:14)
+36 verbose stack     at emitOne (events.js:82:20)
+36 verbose stack     at Request.emit (events.js:169:7)
+36 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1019:12)
+37 verbose statusCode 403
+38 verbose pkgid pkmn
+39 verbose cwd /Users/stephantabor/HR/projects/pokemon
+40 error Darwin 15.0.0
+41 error argv "/usr/local/Cellar/node/4.1.1/bin/node" "/usr/local/bin/npm" "publish"
+42 error node v4.1.1
+43 error npm  v2.14.4
+44 error code E403
+45 error "You cannot publish over the previously published version 1.0.3." : pkmn
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]

@@ -20,12 +20,7 @@ describe('pkmn', function () {
 
         it('should have a queryUrl', () => {
             expect(p.queryUrl).to.be.a('string');
-            expect(p.queryUrl).to.equal('http://pokeapi.co/api/v1/');
-        });
-
-        it('should have a baseUrl', () => {
-            expect(p.baseUrl).to.be.a('string');
-            expect(p.baseUrl).to.equal('http://pokeapi.co');
+            expect(p.queryUrl).to.equal('http://pokeapi.co/api/v1');
         });
 
     });
@@ -38,7 +33,7 @@ describe('pkmn', function () {
 
         it('should build a pokemon query', () => {
             expect(p.buildQuery('pokemon', 1))
-                .to.eventually.equal('http://pokeapi.co/api/v1/pokemon/1/');
+                .to.eventually.equal('http://pokeapi.co/api/v1/pokemon/1');
         });
     });
     describe('end', () => {

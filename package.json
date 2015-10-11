@@ -1,6 +1,6 @@
 {
   "name": "pkmn",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a node.js pokeapi.co api wrapper",
   "homepage": "",
   "repository": "stephantabor/pkmn",
