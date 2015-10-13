@@ -1,6 +1,6 @@
 {
   "name": "pkmn",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a node.js pokeapi.co api wrapper",
   "homepage": "",
   "repository": "stephantabor/pkmn",
@@ -31,7 +31,9 @@
     "gulp-mocha": "^2.0.0",
     "gulp-nsp": "^0.4.5",
     "gulp-plumber": "^1.0.0",
-    "isparta": "^3.0.3"
+    "isparta": "^3.0.3",
+    "rewire": "^2.3.4",
+    "sinon": "^1.17.1"
   },
   "scripts": {
     "prepublish": "gulp prepublish",

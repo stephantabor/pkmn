@@ -4,7 +4,7 @@ import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-describe('pkmn', function () {
+describe('pkmn api integration tests', function () {
     let p;
     this.timeout(5000);
 
@@ -12,30 +12,6 @@ describe('pkmn', function () {
         p = new Pkmn();
     });
 
-    describe('constructor', () => {
-        it('should have a baseUrl', () => {
-            expect(p.baseUrl).to.be.a('string');
-            expect(p.baseUrl).to.equal('http://pokeapi.co');
-        });
-
-        it('should have a queryUrl', () => {
-            expect(p.queryUrl).to.be.a('string');
-            expect(p.queryUrl).to.equal('http://pokeapi.co/api/v1');
-        });
-
-    });
-
-    describe('buildQuery', () => {
-        it('should throw an error for too few arguments', () => {
-            return expect(p.buildQuery('pokemon'))
-                .to.eventually.be.rejected;
-        });
-
-        it('should build a pokemon query', () => {
-            expect(p.buildQuery('pokemon', 1))
-                .to.eventually.equal('http://pokeapi.co/api/v1/pokemon/1');
-        });
-    });
     describe('end', () => {
         it('should fail for malformed query', () => {
             p.query = 'ayyy.lmao';
@@ -75,20 +51,25 @@ describe('pkmn', function () {
         });
     });
     describe('pokemon', () => {
+        let poke;
+        before(() => {
+            poke = p.pokemon(1);
+        });
+
         it('should get pokemon', () => {
-            return expect(p.pokemon(1)).to.eventually.be.fulfilled;
+            return expect(poke).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.pokemon(1)).to.eventually.be.an('object');
+            return expect(poke).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.pokemon(1)).to.eventually.have.property('name');
+            return expect(poke).to.eventually.have.property('name');
         });
 
         it('should be \'Bulbasaur\'', () => {
-            return expect(p.pokemon(1).get('name'))
+            return expect(poke.get('name'))
                 .to.eventually.equal('Bulbasaur');
         });
 
@@ -100,21 +81,25 @@ describe('pkmn', function () {
 
 
     describe('game', () => {
+        let game;
+        before(() => {
+            game = p.game(1);
+        });
         it('should get pokedexs', () => {
-            return expect(p.game(1)).to.eventually.be.fulfilled;
+            return expect(game).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.game(1)).to.eventually.be.an('object');
+            return expect(game).to.eventually.be.an('object');
         });
 
         it('should have a release year', () => {
-            return expect(p.game(1))
+            return expect(game)
                 .to.eventually.have.property('release_year');
         });
 
         it('should be 1996', () => {
-            return expect(p.game(1).get('release_year'))
+            return expect(game.get('release_year'))
                 .to.eventually.equal(1996);
         });
 
@@ -123,39 +108,47 @@ describe('pkmn', function () {
         });
     });
     describe('pokedex', () => {
+        let pokedex;
+        before(() => {
+            pokedex = p.pokedex(1);
+        });
         it('should get the pokedex', () => {
-            return expect(p.pokedex(1)).to.eventually.be.fulfilled;
+            return expect(pokedex).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.pokedex(1)).to.eventually.be.an('object');
+            return expect(pokedex).to.eventually.be.an('object');
         });
 
         it('should have a name property', () => {
-            return expect(p.pokedex()).to.eventually.have.property('name');
+            return expect(pokedex).to.eventually.have.property('name');
         });
 
         it('should be \'national\'', () => {
-            return expect(p.pokedex(1).get('name'))
+            return expect(pokedex.get('name'))
                 .to.eventually.equal('national');
         });
 
     });
     describe('type', () => {
+        let type;
+        before(() => {
+            type = p.type(1);
+        });
         it('should get type', () => {
-            return expect(p.type(1)).to.eventually.be.fulfilled;
+            return expect(type).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.type(1)).to.eventually.be.an('object');
+            return expect(type).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.type(1)).to.eventually.have.property('name');
+            return expect(type).to.eventually.have.property('name');
         });
 
         it('should be \'Normal\'', () => {
-            return expect(p.type(1).get('name'))
+            return expect(type.get('name'))
                 .to.eventually.equal('Normal');
         });
 
@@ -164,20 +157,24 @@ describe('pkmn', function () {
         });
     });
     describe('move', () => {
+        let move;
+        before(() => {
+            move = p.move(1);
+        });
         it('should get moves', () => {
-            return expect(p.move(1)).to.eventually.be.fulfilled;
+            return expect(move).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.move(1)).to.eventually.be.an('object');
+            return expect(move).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.move(1)).to.eventually.have.property('name');
+            return expect(move).to.eventually.have.property('name');
         });
 
         it('should be \'Pound\'', () => {
-            return expect(p.move(1).get('name'))
+            return expect(move.get('name'))
                 .to.eventually.equal('Pound');
         });
 
@@ -186,20 +183,24 @@ describe('pkmn', function () {
         });
     });
     describe('ability', () => {
+        let ability;
+        before(() => {
+            ability = p.ability(1);
+        });
         it('should get abilities', () => {
-            return expect(p.ability(1)).to.eventually.be.fulfilled;
+            return expect(ability).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.ability(1)).to.eventually.be.an('object');
+            return expect(ability).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.ability(1)).to.eventually.have.property('name');
+            return expect(ability).to.eventually.have.property('name');
         });
 
         it('should be \'Stench\'', () => {
-            return expect(p.ability(1).get('name'))
+            return expect(ability.get('name'))
                 .to.eventually.equal('Stench');
         });
 
@@ -209,20 +210,24 @@ describe('pkmn', function () {
         });
     });
     describe('egg', () => {
+        let egg;
+        before(() => {
+            egg = p.egg(1);
+        });
         it('should get eggs', () => {
-            return expect(p.egg(1)).to.eventually.be.fulfilled;
+            return expect(egg).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.egg(1)).to.eventually.be.an('object');
+            return expect(egg).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.egg(1)).to.eventually.have.property('name');
+            return expect(egg).to.eventually.have.property('name');
         });
 
         it('should be \'Monster\'', () => {
-            return expect(p.egg(1).get('name'))
+            return expect(egg.get('name'))
                 .to.eventually.equal('Monster');
         });
 
@@ -231,20 +236,24 @@ describe('pkmn', function () {
         });
     });
     describe('description', () => {
+        let description;
+        before(() => {
+            description = p.description(2);
+        });
         it('should get descriptions', () => {
-            return expect(p.description(2)).to.eventually.be.fulfilled;
+            return expect(description).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.description(2)).to.eventually.be.an('object');
+            return expect(description).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.description(2)).to.eventually.have.property('name');
+            return expect(description).to.eventually.have.property('name');
         });
 
         it('should be \'Bulbasaur_gen_1\'', () => {
-            return expect(p.description(2).get('name'))
+            return expect(description.get('name'))
                 .to.eventually.equal('Bulbasaur_gen_1');
         });
 
@@ -254,20 +263,24 @@ describe('pkmn', function () {
         });
     });
     describe('sprite', () => {
+        let sprite;
+        before(() => {
+            sprite = p.sprite(1);
+        });
         it('should get sprites', () => {
-            return expect(p.sprite(1)).to.eventually.be.fulfilled;
+            return expect(sprite).to.eventually.be.fulfilled;
         });
 
         it('should be an object', () => {
-            return expect(p.sprite(1)).to.eventually.be.an('object');
+            return expect(sprite).to.eventually.be.an('object');
         });
 
         it('should have a name', () => {
-            return expect(p.sprite(1)).to.eventually.have.property('name');
+            return expect(sprite).to.eventually.have.property('name');
         });
 
         it('should be \'Bulbasaur_red_blue\'', () => {
-            return expect(p.sprite(1).get('name'))
+            return expect(sprite.get('name'))
                 .to.eventually.equal('Bulbasaur_red_blue');
         });
 
