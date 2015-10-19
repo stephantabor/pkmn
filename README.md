@@ -1,4 +1,4 @@
-# pkmn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# pkmn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > pokeapi.co wrapper. Details about the api can be found here: http://pokeapi.co/docs/
 
 
@@ -83,10 +83,11 @@ p.api()
 
 MIT © [Stephan Tabor](http://stephantabor.com)
 
-
 [npm-image]: https://badge.fury.io/js/pkmn.svg
 [npm-url]: https://npmjs.org/package/pkmn
 [travis-image]: https://travis-ci.org/stephantabor/pkmn.svg?branch=master
 [travis-url]: https://travis-ci.org/stephantabor/pkmn
 [daviddm-image]: https://david-dm.org/stephantabor/pkmn.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/stephantabor/pkmn
+[coveralls-image]: https://coveralls.io/repos/stephantabor/pkmn/badge.svg
+[coveralls-url]: https://coveralls.io/r/stephantabor/pkmn
