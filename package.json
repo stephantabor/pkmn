@@ -1,6 +1,6 @@
 {
   "name": "pkmn",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "a node.js pokeapi.co api wrapper",
   "homepage": "",
   "repository": "stephantabor/pkmn",
@@ -40,7 +40,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.10.2",
+    "bluebird": "^3.0.2",
     "request": "^2.64.0"
   }
 }
