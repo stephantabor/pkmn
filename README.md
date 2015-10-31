@@ -1,4 +1,5 @@
-# pkmn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# pkmn  
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![npm](https://img.shields.io/npm/dt/pkmn.svg)]()
 > pokeapi.co wrapper. Details about the api can be found here: http://pokeapi.co/docs/
 
 
