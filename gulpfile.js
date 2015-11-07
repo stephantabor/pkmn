@@ -65,5 +65,6 @@ gulp.task('babel', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('prepublish', ['nsp', 'babel']);
+// nsp is broke right now
+gulp.task('prepublish', [/* 'nsp',*/'babel']);
 gulp.task('default', ['static', 'test', 'coveralls']);
